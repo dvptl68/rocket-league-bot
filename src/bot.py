@@ -12,15 +12,18 @@ from util.vec import Vec3
 class MyBot(BaseAgent):
 
   def __init__(self, name, team, index):
+    
     super().__init__(name, team, index)
     self.active_sequence: Sequence = None
     self.boost_pad_tracker = BoostPadTracker()
 
   def initialize_agent(self):
+
     # Set up information about the boost pads now that the game is active and the info is available
     self.boost_pad_tracker.initialize_boosts(self.get_field_info())
 
   def get_output(self, packet: GameTickPacket) -> SimpleControllerState:
+
     """
     This function will be called by the framework many times per second. This is where you can
     see the motion of the ball, etc. and return controls to drive your car.
