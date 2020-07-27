@@ -8,20 +8,19 @@ from util.drive import steer_toward_target
 from util.sequence import Sequence, ControlStep
 from util.vec import Vec3
 
-
+# Main bot code
 class MyBot(BaseAgent):
 
+  # Default constructor
   def __init__(self, name, team, index):
-    
     super().__init__(name, team, index)
     self.active_sequence: Sequence = None
     self.boost_pad_tracker = BoostPadTracker()
 
-  def initialize_agent(self):
+  # Track boost pad information
+  def initialize_agent(self): self.boost_pad_tracker.initialize_boosts(self.get_field_info())
 
-    # Set up information about the boost pads now that the game is active and the info is available
-    self.boost_pad_tracker.initialize_boosts(self.get_field_info())
-
+  # Main controller function
   def get_output(self, packet: GameTickPacket) -> SimpleControllerState:
 
     """
@@ -70,6 +69,7 @@ class MyBot(BaseAgent):
 
     return controls
 
+  # Car flip function
   def begin_front_flip(self, packet):
     
     # Send some quickchat just for fun
